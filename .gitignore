@@ -8,6 +8,7 @@ gradle-app.setting
 !gradle-wrapper.jar
 .idea/workspace.xml
 .idea/misc.xml
+sandbox/out
 # Cache of project
 .gradletasknamecache
 
