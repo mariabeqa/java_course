@@ -11,6 +11,7 @@ gradle-app.setting
 sandbox/out
 # Cache of project
 .gradletasknamecache
+.idea/libraries
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
