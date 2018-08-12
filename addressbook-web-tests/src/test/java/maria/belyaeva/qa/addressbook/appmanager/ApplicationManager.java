@@ -1,7 +1,5 @@
 package maria.belyaeva.qa.addressbook.appmanager;
 
-import maria.belyaeva.qa.addressbook.model.ContactData;
-import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
