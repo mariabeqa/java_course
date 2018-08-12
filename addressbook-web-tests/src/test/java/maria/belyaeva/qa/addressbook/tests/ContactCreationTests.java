@@ -6,9 +6,9 @@ import org.testng.annotations.Test;
 public class ContactCreationTests extends TestBase{
     @Test
     public void testContactCreation() {
-        app.addNewContact();
-        app.fillInContactForm(new ContactData("Maria", "Olegovna", "Belyaeva", "maria_belyaeva", "Burning Buttons", "89237600746", "maria.belyaeva.qa@gmail.com"));
-        app.submitContactInfo();
-        app.returnToHomePage();
+        app.getContactHelper().addNewContact();
+        app.getContactHelper().fillInContactForm(new ContactData("Maria", "Olegovna", "Belyaeva", "maria_belyaeva", "Burning Buttons", "89237600746", "maria.belyaeva.qa@gmail.com"));
+        app.getContactHelper().submitContactInfo();
+        app.getNavigationHelper().returnToHomePage();
     }
 }
