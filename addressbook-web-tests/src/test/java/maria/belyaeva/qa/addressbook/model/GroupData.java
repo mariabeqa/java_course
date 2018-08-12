@@ -1,4 +1,4 @@
-package maria.belyaeva.qa.addressbook;
+package maria.belyaeva.qa.addressbook.model;
 
 public class GroupData {
     private final String name;

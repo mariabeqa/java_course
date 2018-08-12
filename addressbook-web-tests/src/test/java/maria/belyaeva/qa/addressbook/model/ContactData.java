@@ -1,4 +1,4 @@
-package maria.belyaeva.qa.addressbook;
+package maria.belyaeva.qa.addressbook.model;
 
 public class ContactData {
     private final String firstName;
