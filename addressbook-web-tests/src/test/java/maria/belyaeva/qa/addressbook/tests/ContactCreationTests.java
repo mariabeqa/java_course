@@ -3,7 +3,7 @@ package maria.belyaeva.qa.addressbook.tests;
 import maria.belyaeva.qa.addressbook.model.ContactData;
 import org.testng.annotations.Test;
 
-public class ContactCreationTests extends TestBase{
+public class ContactCreationTests extends TestBase {
     @Test
     public void testContactCreation() {
         app.getContactHelper().addNewContact();

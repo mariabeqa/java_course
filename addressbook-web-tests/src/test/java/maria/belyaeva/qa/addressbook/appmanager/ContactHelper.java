@@ -4,7 +4,7 @@ import maria.belyaeva.qa.addressbook.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class ContactHelper extends HelperBase{
+public class ContactHelper extends HelperBase {
     public ContactHelper(FirefoxDriver wd) {
         super(wd);
     }
@@ -35,6 +35,18 @@ public class ContactHelper extends HelperBase{
     }
 
     public void confirmContactDeletion() {
-        wd.switchTo().alert().accept();
+        acceptAlert();
+    }
+
+    public void initContactModification() {
+        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    }
+
+    public void editFieldInContactForm(By locator, String text) {
+        type(locator, text);
+    }
+
+    public void saveContactModification() {
+        click(By.name("update"));
     }
 }
