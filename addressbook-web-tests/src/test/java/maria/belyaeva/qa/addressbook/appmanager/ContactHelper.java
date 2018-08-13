@@ -27,14 +27,14 @@ public class ContactHelper extends HelperBase{
     }
 
     public void selectContact() {
-        click(By.id("2"));
+        click(By.xpath("//tbody//tr[2]//td[1]//input[@type='checkbox']"));
     }
 
-    public void initContactModification() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    public void initContactDeletion() {
+        click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
     }
 
-    public void modifyContactField(String fieldName) {
-        type;
+    public void confirmContactDeletion() {
+        wd.switchTo().alert().accept();
     }
 }
