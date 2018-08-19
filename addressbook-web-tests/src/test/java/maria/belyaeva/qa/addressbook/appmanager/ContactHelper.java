@@ -25,7 +25,12 @@ public class ContactHelper extends HelperBase {
         type(By.name("mobile"), contactData.getCellPhoneNumber());
         type(By.name("email"), contactData.getEmail());
         if(creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            try {
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            } catch (NoSuchElementException e) {
+                System.err.println("There is no any group to choose yet");
+            }
+
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -57,5 +62,15 @@ public class ContactHelper extends HelperBase {
 
     public void saveContactModification() {
         click(By.name("update"));
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.xpath("//tbody//tr[2]//td[1]//input[@type='checkbox']"));
+    }
+
+    public void createContact(ContactData contact) {
+        addNewContact();
+        fillInContactForm(contact, true);
+        submitContactInfo();
     }
 }
