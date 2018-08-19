@@ -2,8 +2,11 @@ package maria.belyaeva.qa.addressbook.appmanager;
 
 import maria.belyaeva.qa.addressbook.model.ContactData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 public class ContactHelper extends HelperBase {
     public ContactHelper(WebDriver wd) {
@@ -13,7 +16,7 @@ public class ContactHelper extends HelperBase {
     public void submitContactInfo() {
         wd.findElement(By.name("submit")).click();
     }
-    public void fillInContactForm(ContactData contactData) {
+    public void fillInContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("middlename"), contactData.getMiddleName());
         type(By.name("lastname"), contactData.getLastName());
@@ -21,6 +24,11 @@ public class ContactHelper extends HelperBase {
         type(By.name("company"), contactData.getCompanyName());
         type(By.name("mobile"), contactData.getCellPhoneNumber());
         type(By.name("email"), contactData.getEmail());
+        if(creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
     }
 
     public void addNewContact() {
