@@ -1,6 +1,7 @@
 package maria.belyaeva.qa.addressbook.appmanager;
 
 import maria.belyaeva.qa.addressbook.model.ContactData;
+import maria.belyaeva.qa.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -42,8 +43,9 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("add new"));
     }
 
-    public void selectContact(int index) {
+    public void selectContact(int index) throws InterruptedException {
         wd.findElements(By.name("selected[]")).get(index).click();
+        Thread.sleep(3000);
     }
 
     public void initContactDeletion() {
@@ -54,8 +56,8 @@ public class ContactHelper extends HelperBase {
         acceptAlert();
     }
 
-    public void initContactModification() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    public void initContactModification(int index) {
+        wd.findElements(By.xpath("//img[@title='Edit']")).get(index).click();
     }
 
     public void editFieldInContactForm(By locator, String text) {
@@ -78,10 +80,13 @@ public class ContactHelper extends HelperBase {
 
     public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<>();
-        List<WebElement> elements = wd.findElements(By.xpath("//table[@id='maintable']//tbody//tr[@name='entry']"));
-        for(WebElement element : elements) {
-            String lastName = element.findElement(By.xpath("//td[2]")).getText();
-            String firstName = element.findElement(By.xpath("//td[3]")).getText();
+        List<WebElement> rows = wd.findElements(By.cssSelector("tr[name='entry']"));
+        for(WebElement row : rows) {
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            System.out.println(cells.size());
+            String lastName = cells.get(1).getText();
+            String firstName = cells.get(2).getText();
+            System.out.println(firstName + " " + lastName);
             ContactData contact = new ContactData(firstName, lastName, null);
             contacts.add(contact);
         }
