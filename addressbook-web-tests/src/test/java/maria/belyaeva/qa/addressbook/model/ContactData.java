@@ -7,6 +7,18 @@ public class ContactData {
     private final String companyName;
     private final String email;
     private final String group;
+    private int id;
+
+
+    public ContactData(int id, String firstName, String lastName, String group) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.nickName = firstName.toLowerCase() + "_" + lastName.toLowerCase();
+        this.companyName = "Burning Buttons";
+        this.email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@bb.com";
+        this.group = group;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -15,6 +27,7 @@ public class ContactData {
 
         ContactData that = (ContactData) o;
 
+        if (id != that.id) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
     }
@@ -23,25 +36,28 @@ public class ContactData {
     public int hashCode() {
         int result = firstName != null ? firstName.hashCode() : 0;
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + id;
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "ContactData{" +
-                "firstName='" + firstName + '\'' +
-
-                ", lastName='" + lastName + '\'' +
-                '}';
-    }
-
     public ContactData(String firstName, String lastName, String group) {
+        this.id = 0;
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickName = firstName.toLowerCase() + "_" + lastName.toLowerCase();
         this.companyName = "Burning Buttons";
         this.email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@bb.com";
         this.group = group;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+
+                ", id='" + id + '\'' +
+                '}';
     }
 
     public String getFirstName() {
@@ -67,4 +83,10 @@ public class ContactData {
     public String getGroup() {
         return group;
     }
+
+    public int getId() {
+        return id;
+    }
+
+
 }
