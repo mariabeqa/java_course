@@ -1,12 +1,10 @@
 package maria.belyaeva.qa.addressbook.appmanager;
 
 import maria.belyaeva.qa.addressbook.model.ContactData;
-import maria.belyaeva.qa.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
@@ -39,7 +37,7 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public void addNewContact() {
+    public void initiateContactCreation() {
         click(By.linkText("add new"));
     }
 
@@ -73,7 +71,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void createContact(ContactData contact) {
-        addNewContact();
+        initiateContactCreation();
         fillInContactForm(contact, true);
         submitContactInfo();
     }

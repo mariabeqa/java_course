@@ -10,16 +10,6 @@ public class ContactData {
     private int id;
 
 
-    public ContactData(int id, String firstName, String lastName, String group) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.nickName = firstName.toLowerCase() + "_" + lastName.toLowerCase();
-        this.companyName = "Burning Buttons";
-        this.email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@bb.com";
-        this.group = group;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -27,7 +17,6 @@ public class ContactData {
 
         ContactData that = (ContactData) o;
 
-        if (id != that.id) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
     }
@@ -36,12 +25,22 @@ public class ContactData {
     public int hashCode() {
         int result = firstName != null ? firstName.hashCode() : 0;
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + id;
         return result;
     }
 
+    public ContactData(int id, String firstName, String lastName, String group) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.nickName = firstName.toLowerCase() + "_" + lastName.toLowerCase();
+        this.companyName = "Burning Buttons";
+        this.email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@bb.com";
+        this.group = group;
+
+    }
+
     public ContactData(String firstName, String lastName, String group) {
-        this.id = 0;
+        this.id = Integer.MAX_VALUE;
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickName = firstName.toLowerCase() + "_" + lastName.toLowerCase();
