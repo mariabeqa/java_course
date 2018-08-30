@@ -2,31 +2,50 @@ package maria.belyaeva.qa.addressbook.model;
 
 public class ContactData {
     private final String firstName;
-    private final String middleName;
     private final String lastName;
     private final String nickName;
     private final String companyName;
-    private final String cellPhoneNumber;
     private final String email;
     private final String group;
 
-    public ContactData(String firstName, String middleName, String lastName, String nickName, String companyName, String cellPhoneNumber, String email, String group) {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ContactData that = (ContactData) o;
+
+        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
+        return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstName != null ? firstName.hashCode() : 0;
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "firstName='" + firstName + '\'' +
+
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
+
+    public ContactData(String firstName, String lastName, String group) {
         this.firstName = firstName;
-        this.middleName = middleName;
         this.lastName = lastName;
-        this.nickName = nickName;
-        this.companyName = companyName;
-        this.cellPhoneNumber = cellPhoneNumber;
-        this.email = email;
+        this.nickName = firstName.toLowerCase() + "_" + lastName.toLowerCase();
+        this.companyName = "Burning Buttons";
+        this.email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@bb.com";
         this.group = group;
     }
 
     public String getFirstName() {
         return firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
     }
 
     public String getLastName() {
@@ -39,10 +58,6 @@ public class ContactData {
 
     public String getCompanyName() {
         return companyName;
-    }
-
-    public String getCellPhoneNumber() {
-        return cellPhoneNumber;
     }
 
     public String getEmail() {

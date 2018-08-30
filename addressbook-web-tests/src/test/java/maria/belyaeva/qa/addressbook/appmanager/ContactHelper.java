@@ -4,9 +4,13 @@ import maria.belyaeva.qa.addressbook.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
     public ContactHelper(WebDriver wd) {
@@ -18,11 +22,9 @@ public class ContactHelper extends HelperBase {
     }
     public void fillInContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstName());
-        type(By.name("middlename"), contactData.getMiddleName());
         type(By.name("lastname"), contactData.getLastName());
         type(By.name("nickname"), contactData.getNickName());
         type(By.name("company"), contactData.getCompanyName());
-        type(By.name("mobile"), contactData.getCellPhoneNumber());
         type(By.name("email"), contactData.getEmail());
         if(creation) {
             try {
@@ -40,8 +42,8 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("add new"));
     }
 
-    public void selectContact() {
-        click(By.xpath("//tbody//tr[2]//td[1]//input[@type='checkbox']"));
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void initContactDeletion() {
@@ -72,5 +74,17 @@ public class ContactHelper extends HelperBase {
         addNewContact();
         fillInContactForm(contact, true);
         submitContactInfo();
+    }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<>();
+        List<WebElement> elements = wd.findElements(By.xpath("//table[@id='maintable']//tbody//tr[@name='entry']"));
+        for(WebElement element : elements) {
+            String lastName = element.findElement(By.xpath("//td[2]")).getText();
+            String firstName = element.findElement(By.xpath("//td[3]")).getText();
+            ContactData contact = new ContactData(firstName, lastName, null);
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }
