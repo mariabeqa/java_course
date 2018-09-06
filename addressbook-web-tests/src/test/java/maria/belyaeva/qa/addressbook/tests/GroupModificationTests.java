@@ -2,30 +2,33 @@ package maria.belyaeva.qa.addressbook.tests;
 
 import maria.belyaeva.qa.addressbook.model.GroupData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class GroupModificationTests extends TestBase {
+
+    @BeforeMethod
+    public void ensurePreconditions() {
+        app.goTo().groupPage();
+        if(app.group().list().size() == 0) {
+            app.group().create(new GroupData().withName("test1").withFooter("footer").withHeader("header"));
+        }
+    }
+
     @Test
     public void testGroupModification() {
-        app.getNavigationHelper().goToGroupPage();
-        if(! app.getGroupHelper().isThereAGroup()) {
-            app.getGroupHelper().createGroup(new GroupData("test1", "Test header", "Test footer"));
-        }
-        List<GroupData> before = app.getGroupHelper().getGroupList();
-        app.getGroupHelper().selectGroup(before.size() - 1);
-        app.getGroupHelper().initGroupModification();
-        GroupData group = new GroupData(before.get(before.size() - 1).getId(),"edited", null, null);
-        app.getGroupHelper().fillGroupForm(group);
-        app.getGroupHelper().saveGroupModification();
-        app.getGroupHelper().returnToGroupPage();
-        List<GroupData> after = app.getGroupHelper().getGroupList();
+        List<GroupData> before = app.group().list();
+        int index = before.size() - 1;
+        GroupData group = new GroupData()
+                .withId(before.get(index).getId()).withName("test1").withHeader("test2").withFooter("test3");
+        app.group().modify(index, group);
+        List<GroupData> after = app.group().list();
         Assert.assertEquals(before.size(), after.size());
 
-        before.remove(before.size() - 1);
+        before.remove(index);
         before.add(group);
         Comparator<? super GroupData> byId = (g1,g2) -> Integer.compare(g1.getId(), g2.getId());
         before.sort(byId);
@@ -33,5 +36,4 @@ public class GroupModificationTests extends TestBase {
         Assert.assertEquals(before,after);
 
     }
-
 }

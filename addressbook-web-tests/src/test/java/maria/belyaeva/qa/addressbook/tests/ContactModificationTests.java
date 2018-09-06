@@ -1,18 +1,16 @@
 package maria.belyaeva.qa.addressbook.tests;
 
 import maria.belyaeva.qa.addressbook.model.ContactData;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactModificationTests extends TestBase {
     @Test
     public void testContactModification() throws InterruptedException {
-        app.getNavigationHelper().returnToHomePage();
+        app.goTo().returnToHomePage();
         if(!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData("Test", "Test", null));
         }
@@ -21,7 +19,7 @@ public class ContactModificationTests extends TestBase {
         ContactData contact = new ContactData(before.get(before.size() - 1).getId(),"Test", "Test", null);
         app.getContactHelper().fillInContactForm(contact, false);
         app.getContactHelper().saveContactModification();
-        app.getNavigationHelper().returnToHomePage();
+        app.goTo().returnToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
 
