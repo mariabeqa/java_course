@@ -37,13 +37,29 @@ public class ContactHelper extends HelperBase {
         }
     }
 
+    public void create(ContactData contact) {
+        fillInContactForm(contact, true);
+        submitContactInfo();
+    }
+
+    public void modify(int index, ContactData contact) {
+        initContactModification(index);
+        fillInContactForm(contact, false);
+        saveContactModification();
+    }
+
+    public void delete(int index) {
+        selectContact(index);
+        initContactDeletion();
+        confirmContactDeletion();
+    }
+
     public void initiateContactCreation() {
         click(By.linkText("add new"));
     }
 
-    public void selectContact(int index) throws InterruptedException {
+    public void selectContact(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
-        Thread.sleep(3000);
     }
 
     public void initContactDeletion() {
@@ -76,7 +92,7 @@ public class ContactHelper extends HelperBase {
         submitContactInfo();
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<>();
         List<WebElement> rows = wd.findElements(By.cssSelector("tr[name='entry']"));
         for(WebElement row : rows) {
