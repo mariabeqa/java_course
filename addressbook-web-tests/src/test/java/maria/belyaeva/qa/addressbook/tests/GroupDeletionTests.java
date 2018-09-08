@@ -1,10 +1,16 @@
 package maria.belyaeva.qa.addressbook.tests;
 
 import maria.belyaeva.qa.addressbook.model.GroupData;
+import maria.belyaeva.qa.addressbook.model.Groups;
+import org.hamcrest.CoreMatchers;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.*;
 
 public class GroupDeletionTests extends TestBase {
 
@@ -18,16 +24,15 @@ public class GroupDeletionTests extends TestBase {
 
     @Test
     public void testGroupDeletion() {
-        Set<GroupData> before = app.group().all();
+        Groups before = app.group().all();
         GroupData deletedGroup = before.iterator().next();
         app.group().deleteById(deletedGroup);
-        Set<GroupData> after = app.group().all();
-        Assert.assertEquals(after.size(), before.size() - 1);
+        Groups after = app.group().all();
+        assertEquals(after.size(), before.size() - 1);
 
-        before.remove(deletedGroup);
 //        Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
 //        before.sort(byId);
 //        after.sort(byId);
-        Assert.assertEquals(before,after);
+        assertThat(after, equalTo(before.withoutAdded(deletedGroup)));
     }
 }
