@@ -5,9 +5,49 @@ public class ContactData {
     private String lastName;
     private String group;
     private int id;
+    private String homePhone;
+    private String mobilePhone;
+    private String workPhone;
+    private String allPhones;
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    public ContactData withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+        return this;
+    }
+
+    public ContactData withMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+        return this;
+    }
+
+    public ContactData withWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+        return this;
+    }
 
     public ContactData withFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
+    }
+
+    public ContactData withLastName(String lastName) {
+
+        this.lastName = lastName;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
+        this.group = group;
+        return this;
+    }
+
+    public ContactData withId(int id) {
+        this.id = id;
         return this;
     }
 
@@ -29,22 +69,6 @@ public class ContactData {
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + id;
         return result;
-    }
-
-    public ContactData withLastName(String lastName) {
-
-        this.lastName = lastName;
-        return this;
-    }
-
-    public ContactData withGroup(String group) {
-        this.group = group;
-        return this;
-    }
-
-    public ContactData withId(int id) {
-        this.id = id;
-        return this;
     }
 
     @Override
@@ -73,5 +97,20 @@ public class ContactData {
         return id;
     }
 
+    public  String getHomePhone() {
+        return  homePhone;
+    }
 
+    public  String getMobilePhone() {
+        return  mobilePhone;
+    }
+
+    public  String getWorkPhone() {
+        return  workPhone;
+    }
+
+
+    public String getAllPhones() {
+        return allPhones;
+    }
 }
