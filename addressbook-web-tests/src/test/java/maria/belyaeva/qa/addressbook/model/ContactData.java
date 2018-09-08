@@ -1,14 +1,30 @@
 package maria.belyaeva.qa.addressbook.model;
 
 public class ContactData {
-    private final String firstName;
-    private final String lastName;
-    private final String nickName;
-    private final String companyName;
-    private final String email;
-    private final String group;
-    private int id;
+    private String firstName;
+    private String lastName;
+    private String group;
+    private int id = Integer.MAX_VALUE;
 
+    public ContactData withFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public ContactData withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
+        this.group = group;
+        return this;
+    }
+
+    public ContactData withId(int Id) {
+        this.id = id;
+        return this;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -28,27 +44,6 @@ public class ContactData {
         return result;
     }
 
-    public ContactData(int id, String firstName, String lastName, String group) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.nickName = firstName.toLowerCase() + "_" + lastName.toLowerCase();
-        this.companyName = "Burning Buttons";
-        this.email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@bb.com";
-        this.group = group;
-
-    }
-
-    public ContactData(String firstName, String lastName, String group) {
-        this.id = Integer.MAX_VALUE;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.nickName = firstName.toLowerCase() + "_" + lastName.toLowerCase();
-        this.companyName = "Burning Buttons";
-        this.email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@bb.com";
-        this.group = group;
-    }
-
     @Override
     public String toString() {
         return "ContactData{" +
@@ -65,18 +60,6 @@ public class ContactData {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public String getGroup() {

@@ -22,9 +22,6 @@ public class ContactHelper extends HelperBase {
     public void fillInContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("lastname"), contactData.getLastName());
-        type(By.name("nickname"), contactData.getNickName());
-        type(By.name("company"), contactData.getCompanyName());
-        type(By.name("email"), contactData.getEmail());
         if(creation) {
             try {
                 new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -102,8 +99,7 @@ public class ContactHelper extends HelperBase {
             String lastName = cells.get(1).getText();
             String firstName = cells.get(2).getText();
             System.out.println(id + " " + firstName + " " + lastName);
-            ContactData contact = new ContactData(id, firstName, lastName, null);
-            contacts.add(contact);
+            contacts.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName));
         }
         return contacts;
     }
