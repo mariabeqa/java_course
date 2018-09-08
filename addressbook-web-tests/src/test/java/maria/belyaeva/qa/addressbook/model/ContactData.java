@@ -4,25 +4,10 @@ public class ContactData {
     private String firstName;
     private String lastName;
     private String group;
-    private int id = Integer.MAX_VALUE;
+    private int id;
 
     public ContactData withFirstName(String firstName) {
         this.firstName = firstName;
-        return this;
-    }
-
-    public ContactData withLastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-    }
-
-    public ContactData withGroup(String group) {
-        this.group = group;
-        return this;
-    }
-
-    public ContactData withId(int Id) {
-        this.id = id;
         return this;
     }
 
@@ -33,6 +18,7 @@ public class ContactData {
 
         ContactData that = (ContactData) o;
 
+        if (id != that.id) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
     }
@@ -41,7 +27,24 @@ public class ContactData {
     public int hashCode() {
         int result = firstName != null ? firstName.hashCode() : 0;
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + id;
         return result;
+    }
+
+    public ContactData withLastName(String lastName) {
+
+        this.lastName = lastName;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
+        this.group = group;
+        return this;
+    }
+
+    public ContactData withId(int id) {
+        this.id = id;
+        return this;
     }
 
     @Override

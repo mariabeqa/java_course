@@ -9,7 +9,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
     public ContactHelper(WebDriver wd) {
@@ -39,14 +41,15 @@ public class ContactHelper extends HelperBase {
         submitContactInfo();
     }
 
-    public void modify(int index, ContactData contact) {
-        initContactModification(index);
+    public void modify(ContactData contact) {
+        initContactModificationById(contact.getId());
         fillInContactForm(contact, false);
         saveContactModification();
     }
 
-    public void delete(int index) {
-        selectContact(index);
+    public void delete(ContactData contact) {
+        System.out.println(contact.getId());
+        selectContactById(contact.getId());
         initContactDeletion();
         confirmContactDeletion();
     }
@@ -57,6 +60,15 @@ public class ContactHelper extends HelperBase {
 
     public void selectContact(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
+    }
+
+    private void initContactModificationById(int id) {
+        wd.findElement(By.xpath("//tr[@name='entry']/td/input[@id='" + id + "']//..//../td[@class='center'][3]//a//img")).click();
+    }
+
+
+    private void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[id='" + id + "']")).click();
     }
 
     public void initContactDeletion() {
@@ -89,12 +101,11 @@ public class ContactHelper extends HelperBase {
         submitContactInfo();
     }
 
-    public List<ContactData> list() {
-        List<ContactData> contacts = new ArrayList<>();
+    public Set<ContactData> all() {
+        Set<ContactData> contacts = new HashSet<>();
         List<WebElement> rows = wd.findElements(By.cssSelector("tr[name='entry']"));
         for(WebElement row : rows) {
             List<WebElement> cells = row.findElements(By.tagName("td"));
-            System.out.println(cells.size());
             int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("id"));
             String lastName = cells.get(1).getText();
             String firstName = cells.get(2).getText();
