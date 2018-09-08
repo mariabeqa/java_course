@@ -1,6 +1,7 @@
 package maria.belyaeva.qa.addressbook.appmanager;
 
 import maria.belyaeva.qa.addressbook.model.ContactData;
+import maria.belyaeva.qa.addressbook.model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -101,8 +102,8 @@ public class ContactHelper extends HelperBase {
         submitContactInfo();
     }
 
-    public Set<ContactData> all() {
-        Set<ContactData> contacts = new HashSet<>();
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> rows = wd.findElements(By.cssSelector("tr[name='entry']"));
         for(WebElement row : rows) {
             List<WebElement> cells = row.findElements(By.tagName("td"));
