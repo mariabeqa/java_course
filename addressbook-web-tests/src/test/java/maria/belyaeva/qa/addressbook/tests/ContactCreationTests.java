@@ -5,15 +5,18 @@ import maria.belyaeva.qa.addressbook.model.Contacts;
 import org.testng.annotations.Test;
 
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
-    @Test
+    @Test()
     public void testContactCreation() {
         Contacts before = app.contact().all();
         app.contact().initiateContactCreation();
-        ContactData contact = new ContactData().withFirstName("New").withLastName("New").withGroup("test1");
+        File photo = new File("src/test/resources/pic.jpg");
+        ContactData contact = new ContactData().withFirstName("New").withLastName("New").withGroup("test1").withPhoto(photo);
         app.contact().create(contact);
         app.goTo().homePage();
         Contacts after = app.contact().all();

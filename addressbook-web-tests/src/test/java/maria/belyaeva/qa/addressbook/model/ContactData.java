@@ -1,5 +1,7 @@
 package maria.belyaeva.qa.addressbook.model;
 
+import java.io.File;
+
 public class ContactData {
     private String firstName;
     private String lastName;
@@ -9,9 +11,16 @@ public class ContactData {
     private String mobilePhone;
     private String workPhone;
     private String allPhones;
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
+
     private String email;
     private String email1;
     private String email2;
+    private File photo;
 
     public ContactData withEmail(String email) {
         this.email = email;
@@ -162,5 +171,9 @@ public class ContactData {
 
     public String getEmail2() {
         return email2;
+    }
+
+    public File getPhoto() {
+        return photo;
     }
 }
