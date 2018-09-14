@@ -1,5 +1,7 @@
 package maria.belyaeva.qa.addressbook.tests;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 import maria.belyaeva.qa.addressbook.model.GroupData;
 import maria.belyaeva.qa.addressbook.model.Groups;
@@ -17,7 +19,7 @@ import static org.hamcrest.MatcherAssert.*;
 public class GroupCreationTests extends TestBase {
 
 //    @DataProvider
-//    public Iterator<Object[]> validGroups() {
+//    public Iterator<Object[]> validGroupsFromXml() {
 //        List<Object[]> list = new ArrayList<>();
 //        list.add(new Object[] {"test1", "header1", "footer1"});
 //        list.add(new Object[] {"test2", "header2", "footer2"});
@@ -26,7 +28,7 @@ public class GroupCreationTests extends TestBase {
 //    }
 
     @DataProvider
-    public Iterator<Object[]> validGroups() throws IOException {
+    public Iterator<Object[]> validGroupsFromXml() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")));
         String xml = "";
         String line = reader.readLine();
@@ -40,7 +42,21 @@ public class GroupCreationTests extends TestBase {
         return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 
-    @Test(dataProvider = "validGroups")
+    @DataProvider
+    public Iterator<Object[]> validGroupsFromJson() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.json")));
+        String json = "";
+        String line = reader.readLine();
+        while (line != null) {
+            json += line;
+            line = reader.readLine();
+        }
+        Gson gson = new Gson();
+        List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>(){}.getType()); //List<GroupData>.class
+        return groups.stream().map((g)-> new Object[] {g}).collect(Collectors.toList()).iterator();
+    }
+
+    @Test(dataProvider = "validGroupsFromJson")
     public void testGroupCreation(GroupData group) {
         app.goTo().groupPage();
         Groups before = app.group().all();
