@@ -1,10 +1,15 @@
 package maria.belyaeva.qa.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.File;
 
 public class ContactData {
+    @Expose
     private String firstName;
+    @Expose
     private String lastName;
+    @Expose
     private String group;
     private int id;
     private String homePhone;
