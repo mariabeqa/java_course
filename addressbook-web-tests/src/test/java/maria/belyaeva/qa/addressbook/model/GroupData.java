@@ -1,9 +1,13 @@
 package maria.belyaeva.qa.addressbook.model;
 
+
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 public class GroupData {
     private String name;
     private String header;
     private String footer;
+    @XStreamOmitField
     private int id = Integer.MAX_VALUE;;
 
     @Override
