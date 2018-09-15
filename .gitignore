@@ -21,3 +21,4 @@ addressbook-web-tests/out
 # gradle/wrapper/gradle-wrapper.properties
 
 /addressbook-web-tests/build/
+/addressbook-web-tests/*.log

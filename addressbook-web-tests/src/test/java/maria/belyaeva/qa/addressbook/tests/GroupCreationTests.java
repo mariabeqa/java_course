@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 import maria.belyaeva.qa.addressbook.model.GroupData;
 import maria.belyaeva.qa.addressbook.model.Groups;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
