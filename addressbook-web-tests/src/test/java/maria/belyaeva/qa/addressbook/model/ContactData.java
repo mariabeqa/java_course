@@ -1,31 +1,72 @@
 package maria.belyaeva.qa.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 
+@Entity
+@Table( name = "addressbook")
 public class ContactData {
     @Expose
+    @Column( name = "firstname")
     private String firstName;
+
     @Expose
+    @Column( name = "lastname")
     private String lastName;
+
     @Expose
+    @Transient
     private String group;
+
+    @Id
+    @Column( name = "id")
     private int id;
+
+    @Column( name = "home")
+    @Type(type = "text")
     private String homePhone;
+
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobilePhone;
+
+    @Column( name = "work")
+    @Type(type = "text")
     private String workPhone;
+
+    @Transient
     private String allPhones;
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
+    @Column( name = "email")
+    @Type(type = "text")
     private String email;
+
+    @Column(name = "email2")
+    @Type(type = "text")
     private String email1;
+
+    @Column(name = "email3")
+    @Type(type = "text")
     private String email2;
-    private File photo;
+
+    @Column( name = "photo")
+    @Type(type = "text")
+    private String photo;
+
+    @Transient
+    private String allEmails;
+
+    @Column(name = "address")
+    @Type(type = "text")
+    private String address;
 
     public ContactData withEmail(String email) {
         this.email = email;
@@ -51,9 +92,6 @@ public class ContactData {
         this.address = address;
         return this;
     }
-
-    private String allEmails;
-    private String address;
 
     public ContactData withAllPhones(String allPhones) {
         this.allPhones = allPhones;
@@ -179,6 +217,6 @@ public class ContactData {
     }
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 }
