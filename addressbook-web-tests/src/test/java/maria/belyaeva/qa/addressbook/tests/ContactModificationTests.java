@@ -10,22 +10,27 @@ import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactModificationTests extends TestBase {
+
     @BeforeMethod
     public void ensurePreconditions() {
-        app.goTo().homePage();
-        if(app.contact().all().size() == 0) {
-            app.contact().createContact(new ContactData().withFirstName("New").withLastName("New"));
+        if(app.db().contacts().size() == 0) {
+            app.goTo().homePage();
+            app.contact().createContact(new ContactData().withFirstName("New").withLastName("New").withAddress("New")
+                    .withHomePhone("99-99-99").withMobilePhone("78987877878").withWorkPhone("55-55-44")
+                    .withEmail("newemail@test.com").withEmail2("newemail2@gmail.com").withEmail3("newemail3@gmail.com"));
         }
     }
 
     @Test
     public void testContactModification() throws InterruptedException {
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         ContactData modifiedContact  = before.iterator().next();
-        ContactData contact = new ContactData().withFirstName("Test1").withLastName("Test1").withId(modifiedContact.getId());
+        ContactData contact = new ContactData().withFirstName("New").withLastName("New").withId(modifiedContact.getId())
+                .withAddress("New").withHomePhone("99-99-99").withMobilePhone("78987877878").withWorkPhone("55-55-44")
+                .withEmail("newemail@test.com").withEmail2("newemail2@gmail.com").withEmail3("newemail3@gmail.com");
         app.contact().modify(contact);
         app.goTo().homePage();
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         assertThat(after.size(), CoreMatchers.equalTo(before.size()));
 
         assertThat(after, CoreMatchers.equalTo(before.without(modifiedContact).withAdded(contact)));

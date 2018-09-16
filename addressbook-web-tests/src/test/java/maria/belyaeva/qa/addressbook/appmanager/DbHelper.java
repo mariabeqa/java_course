@@ -1,6 +1,7 @@
 package maria.belyaeva.qa.addressbook.appmanager;
 
 import maria.belyaeva.qa.addressbook.model.ContactData;
+import maria.belyaeva.qa.addressbook.model.Contacts;
 import maria.belyaeva.qa.addressbook.model.GroupData;
 import maria.belyaeva.qa.addressbook.model.Groups;
 import org.hibernate.Session;
@@ -33,5 +34,17 @@ public class DbHelper {
         session.getTransaction().commit();
         session.close();
         return new Groups(result);
+    }
+
+    public Contacts contacts() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<ContactData> result = session.createQuery( "from ContactData where deprecated = '0000-00-00'" ).list();
+        for ( ContactData contact : result ) {
+            System.out.println(contact);
+        }
+        session.getTransaction().commit();
+        session.close();
+        return new Contacts(result);
     }
 }

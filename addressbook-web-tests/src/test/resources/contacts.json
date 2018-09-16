@@ -2,16 +2,34 @@
   {
     "firstName": "Test user 0",
     "lastName": "Test user 0",
-    "group": "test1"
+    "homePhone": "46-55-65",
+    "mobilePhone": "79898977989",
+    "workPhone": "55-55-55",
+    "email": "email@gmail.com",
+    "email1": "email2@gmail.com",
+    "email2": "email3@gmail.com",
+    "address": "Omsk, Zukova 21"
   },
   {
     "firstName": "Test user 1",
     "lastName": "Test user 1",
-    "group": "test1"
+    "homePhone": "32-34-45",
+    "mobilePhone": "7(878)983 3543",
+    "workPhone": "55 55 55",
+    "email": "email@gmail.com",
+    "email1": "email2@gmail.com",
+    "email2": "email3@gmail.com",
+    "address": "Omsk, Zukova 21"
   },
   {
     "firstName": "Test user 2",
     "lastName": "Test user 2",
-    "group": "test1"
+    "homePhone": "46-56-68",
+    "mobilePhone": "7(765)8766765",
+    "workPhone": "55-55-55",
+    "email": "email@gmail.com",
+    "email1": "email2@gmail.com",
+    "email2": "email3@gmail.com",
+    "address": "Omsk, Zukova 21"
   }
 ]

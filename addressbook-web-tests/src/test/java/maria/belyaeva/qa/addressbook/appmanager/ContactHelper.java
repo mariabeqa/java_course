@@ -22,18 +22,25 @@ public class ContactHelper extends HelperBase {
     public void fillInContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("lastname"), contactData.getLastName());
-        attach(By.name("photo"), contactData.getPhoto());
+        type(By.name("address"), contactData.getAddress());
+        type(By.name("home"), contactData.getHomePhone());
+        type(By.name("mobile"), contactData.getMobilePhone());
+        type(By.name("work"), contactData.getWorkPhone());
+        type(By.name("email"), contactData.getEmail());
+        type(By.name("email2"), contactData.getEmail1());
+        type(By.name("email3"), contactData.getEmail2());
+        //attach(By.name("photo"), contactData.getPhoto());
 
-        if(creation) {
-            try {
-                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-            } catch (NoSuchElementException e) {
-                System.err.println("There is no any group to choose yet");
-            }
-
-        } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
-        }
+//        if(creation) {
+//            try {
+//                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+//            } catch (NoSuchElementException e) {
+//                System.err.println("There is no any group to choose yet");
+//            }
+//
+//        } else {
+//            Assert.assertFalse(isElementPresent(By.name("new_group")));
+//        }
     }
 
     public void create(ContactData contact) {
