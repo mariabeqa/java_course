@@ -4,6 +4,7 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import maria.belyaeva.qa.addressbook.model.ContactData;
 import maria.belyaeva.qa.addressbook.model.Contacts;
+import maria.belyaeva.qa.addressbook.model.GroupData;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
