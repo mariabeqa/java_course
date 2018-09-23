@@ -5,6 +5,8 @@ import maria.belyaeva.qa.addressbook.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
 import java.util.List;
 
 public class GroupHelper extends HelperBase {
@@ -97,6 +99,10 @@ public class GroupHelper extends HelperBase {
             groupCache.add(new GroupData().withId(id).withName(name));
         }
         return groupCache;
+    }
+
+    public void selectGroupOnHomePage(GroupData group) {
+        new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(group.getId()));
     }
 }
 

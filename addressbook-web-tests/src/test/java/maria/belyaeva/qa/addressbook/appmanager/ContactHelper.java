@@ -2,6 +2,7 @@ package maria.belyaeva.qa.addressbook.appmanager;
 
 import maria.belyaeva.qa.addressbook.model.ContactData;
 import maria.belyaeva.qa.addressbook.model.Contacts;
+import maria.belyaeva.qa.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -61,12 +62,20 @@ public class ContactHelper extends HelperBase {
         confirmContactDeletion();
     }
 
+
+    public void addToGroup(ContactData contact, GroupData group) {
+        selectContactById(contact.getId());
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(group.getId()));
+        wd.findElement(By.cssSelector("input[name='add']")).click();
+    }
+
     public void initiateContactCreation() {
         click(By.linkText("add new"));
     }
 
-    public void selectContact(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
+    public void removeContact(ContactData contact) {
+        wd.findElement(By.xpath("//tr[@name='entry']/td[1]/input[@id=" + String.valueOf(contact.getId()) + "]")).click();
+        wd.findElement(By.xpath("//input[@name='remove']")).click();
     }
 
     private void initContactModificationById(int id) {
