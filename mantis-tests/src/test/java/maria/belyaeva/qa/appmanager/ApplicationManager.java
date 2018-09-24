@@ -37,12 +37,19 @@ public class ApplicationManager {
         } else if (Objects.equals(browser, BrowserType.SAFARI)) {
             wd = new SafariDriver();
         }
-
         wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         wd.get(properties.getProperty("web.baseUrl"));
     }
 
     public void stop() {
         wd.quit();
+    }
+
+    public HttpSession newSession() {
+        return new HttpSession(this);
+    }
+
+    public String getProperty(String key) {
+        return properties.getProperty(key);
     }
 }
