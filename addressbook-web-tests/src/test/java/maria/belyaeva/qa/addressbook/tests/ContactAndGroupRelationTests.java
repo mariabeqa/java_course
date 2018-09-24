@@ -41,7 +41,7 @@ public class ContactAndGroupRelationTests extends TestBase {
 
 
         //выбранная группа
-        GroupData groupToAdd = groups.iterator().next();
+         GroupData groupToAdd = groups.iterator().next();
         //группы контакта
         Groups contactGroupsBefore = contactToSelect.getGroups();
 
