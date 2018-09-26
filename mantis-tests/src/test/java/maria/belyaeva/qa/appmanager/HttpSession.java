@@ -34,7 +34,8 @@ public class HttpSession {
         post.setEntity(new UrlEncodedFormEntity(params));
         CloseableHttpResponse response = httpClient.execute(post);
         String body = getTextFrom(response);
-        return body.contains(String.format("<span class=\"label hidden-xs label-default arrowed\">%s</span>", username));
+        System.out.println("body " + body + " username " + username);
+        return body.contains(String.format("<a href=\"mantisbt-2.17.0/account_page.php\">%s</a>", username));
     }
 
     private String getTextFrom(CloseableHttpResponse response) throws IOException {
@@ -46,7 +47,7 @@ public class HttpSession {
     }
 
     public boolean isLoggedInAs(String username) throws IOException {
-        HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/account_page.php");
+        HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/mantisbt-2.17.0/account_page.php");
         CloseableHttpResponse response = httpClient.execute(get);
         String body = getTextFrom(response);
         return body.contains(String.format("<span class=\"label hidden-xs label-default arrowed\">%s</span>", username));
