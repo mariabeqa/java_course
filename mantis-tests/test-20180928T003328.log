@@ -1,0 +1,17 @@
+286  [main] DEBUG o.s.smtp.server.CommandHandler - Added command: AUTH
+288  [main] DEBUG o.s.smtp.server.CommandHandler - Added command: DATA
+288  [main] DEBUG o.s.smtp.server.CommandHandler - Added command: EHLO
+288  [main] DEBUG o.s.smtp.server.CommandHandler - Added command: HELO
+289  [main] DEBUG o.s.smtp.server.CommandHandler - Added command: HELP
+289  [main] DEBUG o.s.smtp.server.CommandHandler - Added command: MAIL
+289  [main] DEBUG o.s.smtp.server.CommandHandler - Added command: NOOP
+289  [main] DEBUG o.s.smtp.server.CommandHandler - Added command: QUIT
+289  [main] DEBUG o.s.smtp.server.CommandHandler - Added command: RCPT
+289  [main] DEBUG o.s.smtp.server.CommandHandler - Added command: RSET
+289  [main] DEBUG o.s.smtp.server.CommandHandler - Added command: STARTTLS
+289  [main] DEBUG o.s.smtp.server.CommandHandler - Added command: VRFY
+290  [main] INFO  o.s.smtp.server.SMTPServer - SMTP server *:2500 starting
+296  [org.subethamail.smtp.server.ServerThread *:2500] INFO  o.s.smtp.server.ServerThread - SMTP server *:2500 started
+4758 [main] INFO  o.s.smtp.server.SMTPServer - SMTP server *:2500 stopping
+4761 [main] DEBUG o.s.smtp.server.ServerThread - SMTP Server socket shut down
+4761 [org.subethamail.smtp.server.ServerThread *:2500] INFO  o.s.smtp.server.ServerThread - SMTP server *:2500 stopped

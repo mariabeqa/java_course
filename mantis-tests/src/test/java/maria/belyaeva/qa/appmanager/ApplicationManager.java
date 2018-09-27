@@ -22,6 +22,10 @@ public class ApplicationManager {
     private FtpHelper ftp;
     private MailHelper mailHelper;
     private JamesHelper jamesHelper;
+    private SessionHelper sessionHelper;
+    private NavigationHelper navigationHelper;
+    private DbHelper dbHelper;
+    protected UserHelper userHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -71,7 +75,7 @@ public class ApplicationManager {
                 wd = new SafariDriver();
             }
             wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-            wd.get(properties.getProperty("web.baseUrl"));
+            wd.get(properties.getProperty("web.baseUrl") + "/mantisbt-2.17.0/login_page.php");
         }
         return wd;
     }
@@ -88,5 +92,33 @@ public class ApplicationManager {
             jamesHelper = new JamesHelper(this);
         }
         return jamesHelper;
+    }
+
+    public SessionHelper session() {
+        if(sessionHelper == null) {
+            sessionHelper = new SessionHelper(this);
+        }
+        return sessionHelper;
+    }
+
+    public NavigationHelper goTo() {
+        if(navigationHelper == null) {
+            navigationHelper = new NavigationHelper(this);
+        }
+        return navigationHelper;
+    }
+
+    public DbHelper db() {
+        if(dbHelper == null) {
+            dbHelper = new DbHelper();
+        }
+        return dbHelper;
+    }
+
+    public UserHelper user() {
+        if(userHelper == null) {
+            userHelper = new UserHelper(this);
+        }
+        return userHelper;
     }
 }

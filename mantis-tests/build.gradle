@@ -13,7 +13,7 @@ dependencies {
     testCompile group: 'org.subethamail', name: 'subethasmtp', version: '3.1.7'
     compile group: 'ru.lanwen.verbalregex', name: 'java-verbal-expressions', version: '1.5'
     testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
-
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.3.6.Final'
 }
 
 task {
