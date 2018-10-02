@@ -1,4 +1,4 @@
-package maria.belyaeva.qa.rest;
+package maria.belyaeva.qa.bugify.model;
 
 public class Issue {
     private int id;
