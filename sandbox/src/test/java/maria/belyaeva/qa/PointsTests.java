@@ -14,7 +14,7 @@ public class PointsTests {
         Assert.assertEquals(p1.x,3.0);
         Assert.assertEquals(p1.y,-4.0);
         Assert.assertEquals(p2.x,-6.0);
-        Assert.assertEquals(p2.y,10.0);
+        Assert.assertEquals(p2.y,5.0);
         Assert.assertEquals(Math.round(d),13);
 
     }
