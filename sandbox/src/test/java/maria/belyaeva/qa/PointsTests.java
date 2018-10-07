@@ -1,6 +1,5 @@
 package maria.belyaeva.qa;
 
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
