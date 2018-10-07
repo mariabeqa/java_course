@@ -43,11 +43,11 @@ public class ApplicationManager {
         dbHelper = new DbHelper();
 
         if("".equals(properties.getProperty("selenium.server"))) {
-            if(Objects.equals(browser, BrowserType.FIREFOX)) {
+            if(browser.equals(BrowserType.FIREFOX)) {
                 wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
-            } else if (Objects.equals(browser, BrowserType.CHROME)) {
+            } else if (browser.equals(BrowserType.CHROME)) {
                 wd = new ChromeDriver();
-            } else if (Objects.equals(browser, BrowserType.SAFARI)) {
+            } else if (browser.equals(BrowserType.SAFARI)) {
                 wd = new SafariDriver();
             }
         } else {
